@@ -2,11 +2,20 @@ import struct
 
 
 def tamper(student_id):
-  pass
+  with open('d:\Program Files\pywork\pywork2\lenna.bmp','r+b') as f:
+    f.seek(57)
+    for a in student_id:
+      b=int(a)
+      if(b==0):
+        b=10
+      f.read((b-1)*3)
+      f.write(bytes.fromhex('000000'))
+
+
 
 
 def detect():
-  with open('lenna.bmp', 'rb') as f:
+  with open('d:\Program Files\pywork\pywork2\lenna.bmp', 'rb') as f:
     bmp_file_header = f.read(14)
 
     bm, size, r1, r2, offset = struct.unpack('<2sIHHI', bmp_file_header)
